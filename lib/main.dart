@@ -19,7 +19,7 @@ class ElectronicCommerce extends StatelessWidget {
         routes: {
           "loginpage":(context)=>const Loginpage(),
           "signuppage":(context)=>const SignUppage(),
-          "homepage":(context)=>const Homepage(),
+          "homepage":(context)=> Homepage(),
         },
       ),
     );
