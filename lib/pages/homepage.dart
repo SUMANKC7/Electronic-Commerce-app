@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:electronic_ecommerce/features/product.dart';
+import 'package:electronic_ecommerce/pages/allproduct.dart';
 import 'package:flutter/material.dart';
+
+import '../services/product_services.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -40,8 +43,8 @@ class _HomepageState extends State<Homepage> {
             icon: const Icon(Icons.menu)),
         title: const Text("Home"),
         actions: [
-          IconButton(onPressed: () {}, icon:const Icon(Icons.notifications)),
-          IconButton(onPressed: () {}, icon:const Icon(Icons.shopping_bag)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag)),
           const SizedBox(
             width: 10,
           )
@@ -101,9 +104,9 @@ class _HomepageState extends State<Homepage> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.sizeOf(context).height*0.1,
-              padding:
-                  const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
+              height: MediaQuery.sizeOf(context).height * 0.1,
+              padding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 15, bottom: 10),
               child: TextField(
                 decoration: InputDecoration(
                   prefixIcon: Icon(
@@ -149,9 +152,8 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-            
             SizedBox(
-              height: MediaQuery.sizeOf(context).height*0.15,
+              height: MediaQuery.sizeOf(context).height * 0.15,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: categories.length,
@@ -160,15 +162,11 @@ class _HomepageState extends State<Homepage> {
                     return CategoryItem(category: categories[index]);
                   }),
             ),
-        
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.15,
               child: CarouselItem(carosulImage: carosulImage),
             ),
-        
-            
-        
-             Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25, right: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,7 +176,10 @@ class _HomepageState extends State<Homepage> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context)=>AllProduct()));
+                    },
                     child: Row(
                       children: [
                         Text("All Products",
@@ -196,9 +197,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-          
-          ProductView()
-        
+            ProductView()
           ],
         ),
       ),
@@ -217,11 +216,13 @@ class CarouselItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselView(
-        itemExtent: MediaQuery.sizeOf(context).width*0.8,
+        itemExtent: MediaQuery.sizeOf(context).width * 0.8,
         children: List.generate(carosulImage.length, (int index) {
-          return Image.asset(carosulImage[index],fit: BoxFit.cover,);
-        })
-        );
+          return Image.asset(
+            carosulImage[index],
+            fit: BoxFit.cover,
+          );
+        }));
   }
 }
 
@@ -235,7 +236,7 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric( horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
           CircleAvatar(
