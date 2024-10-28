@@ -1,7 +1,6 @@
 import 'package:electronic_ecommerce/model/detailproductmodel.dart';
 import 'package:electronic_ecommerce/model/productmodel.dart';
 import 'package:electronic_ecommerce/services/detailproduct_service.dart';
-import 'package:electronic_ecommerce/services/product_services.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -23,7 +22,19 @@ class AllProduct extends StatelessWidget {
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   return Column(
-                    
+                    children: [
+                      Image.network("src"),
+                      Text("Product Name"),
+                      Row(
+                        children: [
+                          Text("Product Price"),
+                          Text("Rating")
+                        ],
+                      ),
+                      Text("Product Description"),
+                      Text("Product Description"),
+                      Image.network('image')
+                    ],
                   );
                 });
           } else {
