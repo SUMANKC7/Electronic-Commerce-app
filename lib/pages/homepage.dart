@@ -3,8 +3,6 @@ import 'package:electronic_ecommerce/features/product.dart';
 import 'package:electronic_ecommerce/pages/allproduct.dart';
 import 'package:flutter/material.dart';
 
-import '../services/product_services.dart';
-
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -15,12 +13,18 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   List<Categories> categories = [
-    Categories("Refrigerator ", "assests/images/fridge.png"),
-    Categories("Laptop ", "assests/images/laptop.png"),
-    Categories("Phone ", "assests/images/phone.png"),
-    Categories("Smartwatch", "assests/images/smartwatch.png"),
-    Categories("TV ", "assests/images/television.png"),
-    Categories("Washing Machine", "assests/images/washingmachine.png"),
+    Categories("Beauty ", "assests/images/beauty.png"),
+    Categories("Fragrances ", "assests/images/fragrance.png"),
+    Categories("Laptops ", "assests/images/laptop.png"),
+    Categories("Groceries", "assests/images/grocery.png"),
+    Categories("Furniture ", "assests/images/furniture.png"),
+    Categories("Watches", "assests/images/smartwatch.png"),
+    Categories("Smartphones", "assests/images/phone.png"),
+    Categories("Tablets", "assests/images/tablets.png"),
+    Categories("Women-Bags", "assests/images/bag.png"),
+    Categories("Sports-Accessories", "assests/images/sports.png"),
+   Categories("Sunglasses", "assests/images/sunglasses.png"),
+   Categories("Shoes", "assests/images/shoes.png"),
   ];
 
   List carosulImage = [
@@ -245,7 +249,7 @@ class CategoryItem extends StatelessWidget {
               category.categoryimages,
               width: 43,
               height: 45,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           SizedBox(

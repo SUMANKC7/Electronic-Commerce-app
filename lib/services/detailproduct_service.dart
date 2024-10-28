@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:electronic_ecommerce/model/detailproductmodel.dart';
-import 'package:electronic_ecommerce/model/productmodel.dart';
 import 'package:http/http.dart' as http;
 
 class DetailproductService {
