@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:electronic_ecommerce/model/detailproductmodel.dart';
 import 'package:electronic_ecommerce/model/productmodel.dart';
 import 'package:http/http.dart' as http;
 
@@ -44,4 +45,25 @@ class ProductServices {
       throw Exception(e.toString());
     }
   }
+
+  Future<Detailproductmodel> getProductById(int id) async {
+  try {
+    // Get categories or other required logic
+    List<String> categoryUrls = await getAllCategoryUrls();
+
+    for (String url in categoryUrls) {
+      var response = await http.get(Uri.parse("$baseURL/$id"));
+      if (response.statusCode == 200) {
+        var decodedData = jsonDecode(response.body);
+        return Detailproductmodel.fromJson(decodedData); // Return a single product
+      } else {
+        print("Failed to load product details for category: $url");
+      }
+    }
+  } catch (e) {
+    throw Exception(e.toString());
+  }
+  throw Exception("Product not found"); // In case no product is found
+}
+
 }
