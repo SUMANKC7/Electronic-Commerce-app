@@ -1,10 +1,19 @@
 import 'package:electronic_ecommerce/authentication/loginpage.dart';
 import 'package:electronic_ecommerce/authentication/signup.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
+import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const ElectronicCommerce());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=>BottomNavProvider()),
+      ],
+    child: const ElectronicCommerce()
+    )
+    );
 }
 class ElectronicCommerce extends StatelessWidget {
   const ElectronicCommerce({super.key});
