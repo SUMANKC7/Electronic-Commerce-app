@@ -1,3 +1,5 @@
+import 'package:electronic_ecommerce/pages/addtocart.dart';
+import 'package:electronic_ecommerce/pages/buynow.dart';
 import 'package:electronic_ecommerce/services/product_services.dart';
 import 'package:flutter/material.dart';
 import 'package:electronic_ecommerce/model/detailproductmodel.dart';
@@ -162,34 +164,42 @@ class _DetailPageState extends State<DetailPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            // Handle Add to Cart action
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Cartpage()));
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(10, 52),
-                            backgroundColor: const Color.fromARGB(255, 246, 156, 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)
-                            )
-                            
+                              minimumSize: Size(10, 52),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 246, 156, 20),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7))),
+                          child: Text(
+                            "Add to Cart",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
-                          child: Text("Add to Cart",style: TextStyle(fontSize: 18,color: Colors.white),),
                         ),
                       ),
                       SizedBox(width: 10),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            // Handle Buy Now action
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Buynow()));
                           },
-                          style:  ElevatedButton.styleFrom(
-                            minimumSize: Size(10, 52),
-                            backgroundColor: const Color.fromARGB(255, 252, 107, 3),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)
-                            )
-                            
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size(10, 52),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 252, 107, 3),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7))),
+                          child: Text(
+                            "Buy Now",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
-                          child: Text("Buy Now",style: TextStyle(fontSize: 18,color: Colors.white),),
                         ),
                       ),
                     ],

@@ -1,5 +1,6 @@
 import 'package:electronic_ecommerce/authentication/loginpage.dart';
 import 'package:electronic_ecommerce/authentication/signup.dart';
+import 'package:electronic_ecommerce/pages/home.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
 import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +26,12 @@ class ElectronicCommerce extends StatelessWidget {
        debugShowCheckedModeBanner: false,
         title: "E-Commerce App",
       
-        initialRoute: "homepage",
+        initialRoute: "home",
         routes: {
           "loginpage":(context)=>const Loginpage(),
           "signuppage":(context)=>const SignUppage(),
           "homepage":(context)=>const Homepage(),
+          "home":(context)=> Homescreen(),
         },
       ),
     );

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:electronic_ecommerce/features/product.dart';
 import 'package:electronic_ecommerce/pages/allproduct.dart';
 import 'package:flutter/material.dart';
@@ -205,9 +206,11 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+      
     );
   }
 }
+
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
