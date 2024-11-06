@@ -1,10 +1,10 @@
-
 class ProductModel {
   int? id;
   String? title;
   double? price;
   double? rating;
   String? thumbnail;
+  double? discountPercentage;
 
   ProductModel(
     this.id,
@@ -12,6 +12,7 @@ class ProductModel {
     this.price,
     this.rating,
     this.thumbnail,
+    this.discountPercentage,
   );
 
   ProductModel.fromJson(Map<String, dynamic> json) {
@@ -20,5 +21,6 @@ class ProductModel {
     price = (json['price'] as num).toDouble(); // Ensures price is a double
     rating = (json['rating'] as num).toDouble(); // Ensures rating is a double
     thumbnail = json['thumbnail'];
+    discountPercentage = (json["discountPercentage"] as num).toDouble();
   }
 }

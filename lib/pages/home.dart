@@ -1,7 +1,10 @@
 import 'package:electronic_ecommerce/pages/accountpage.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
+import 'package:electronic_ecommerce/pages/categorypage.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
+import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -11,31 +14,20 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-
-  
-  // Track the selected tab index
-  int _selectedIndex = 0;
-
-  // List of pages to display for each tab
   static final List<Widget> _pages = <Widget>[
     Homepage(),
-    
+    Categorypage(),
     Cartpage(),
-   MyAccount()
+    MyAccount()
   ];
-
-  // Method to handle bottom navigation bar item tap
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final bottomNavProvider = Provider.of<BottomNavProvider>(context);
+
     return Scaffold(
-     
-      body: _pages[_selectedIndex],  // Display the selected page
+      body:
+          _pages[bottomNavProvider.SelectedIndex], // Display the selected page
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -55,10 +47,12 @@ class _HomescreenState extends State<Homescreen> {
             label: 'Account',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        currentIndex: bottomNavProvider.SelectedIndex,
+        selectedItemColor: const Color.fromARGB(255, 255, 123, 0),
         unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          bottomNavProvider.updateindex(index);
+        },
       ),
     );
   }

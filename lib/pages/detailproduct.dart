@@ -20,6 +20,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
+   
     return FutureBuilder<Detailproductmodel>(
       future: ProductServices().getProductById(widget.productId),
       builder: (context, snapshot) {
@@ -188,7 +189,9 @@ class _DetailPageState extends State<DetailPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Buynow()));
+                                    builder: (context) => Buynow(
+                                          productId: widget.productId
+                                        )));
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(10, 52),

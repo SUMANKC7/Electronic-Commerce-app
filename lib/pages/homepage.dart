@@ -24,8 +24,8 @@ class _HomepageState extends State<Homepage> {
     Categories("Tablets", "assests/images/tablets.png"),
     Categories("Women-Bags", "assests/images/bag.png"),
     Categories("Sports-Accessories", "assests/images/sports.png"),
-   Categories("Sunglasses", "assests/images/sunglasses.png"),
-   Categories("Shoes", "assests/images/shoes.png"),
+    Categories("Sunglasses", "assests/images/sunglasses.png"),
+    Categories("Shoes", "assests/images/shoes.png"),
   ];
 
   List carosulImage = [
@@ -48,7 +48,12 @@ class _HomepageState extends State<Homepage> {
             icon: const Icon(Icons.menu)),
         title: const Text("Home"),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Homepage()));
+              },
+              icon: const Icon(Icons.notifications)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag)),
           const SizedBox(
             width: 10,
@@ -183,7 +188,9 @@ class _HomepageState extends State<Homepage> {
                   TextButton(
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context)=>AllProduct()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AllProduct()));
                     },
                     child: Row(
                       children: [
@@ -206,11 +213,9 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
-      
     );
   }
 }
-
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({

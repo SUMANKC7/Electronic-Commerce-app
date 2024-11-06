@@ -6,7 +6,8 @@ class Detailproductmodel {
   String? productDescription;
   double? productRating;
   int? stock;
-  List<String>? otherImages;  // Adjusted to List<String> to handle array data
+  double? discount;
+  List<String>? otherImages; // Adjusted to List<String> to handle array data
 
   Detailproductmodel({
     this.id,
@@ -17,6 +18,7 @@ class Detailproductmodel {
     this.producttitle,
     this.stock,
     this.otherImages,
+    this.discount
   });
 
   Detailproductmodel.fromJson(Map<String, dynamic> json) {
@@ -27,8 +29,8 @@ class Detailproductmodel {
     productDescription = json["description"] as String?;
     productRating = (json["rating"] as num?)?.toDouble();
     stock = json["stock"] as int?;
-    
-    
+    discount=(json["discountPercentage"] as num).toDouble();
+
     if (json["images"] is List) {
       otherImages = List<String>.from(json["images"]);
     } else {

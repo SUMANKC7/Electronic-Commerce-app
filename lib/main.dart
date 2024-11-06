@@ -1,5 +1,6 @@
 import 'package:electronic_ecommerce/authentication/loginpage.dart';
 import 'package:electronic_ecommerce/authentication/signup.dart';
+import 'package:electronic_ecommerce/features/map.dart';
 import 'package:electronic_ecommerce/pages/home.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
 import 'package:electronic_ecommerce/provider/bottom_nav.dart';
@@ -32,6 +33,7 @@ class ElectronicCommerce extends StatelessWidget {
           "signuppage":(context)=>const SignUppage(),
           "homepage":(context)=>const Homepage(),
           "home":(context)=> Homescreen(),
+          "map":(context)=>MapPage()
         },
       ),
     );
