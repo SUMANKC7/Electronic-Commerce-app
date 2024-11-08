@@ -1,7 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:electronic_ecommerce/features/product.dart';
+import 'package:electronic_ecommerce/model/categorymodel.dart';
 import 'package:electronic_ecommerce/pages/allproduct.dart';
+import 'package:electronic_ecommerce/pages/categorypage.dart';
+import 'package:electronic_ecommerce/pages/productscreen.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -13,19 +14,84 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-  List<Categories> categories = [
-    Categories("Beauty ", "assests/images/beauty.png"),
-    Categories("Fragrances ", "assests/images/fragrance.png"),
-    Categories("Laptops ", "assests/images/laptop.png"),
-    Categories("Groceries", "assests/images/grocery.png"),
-    Categories("Furniture ", "assests/images/furniture.png"),
-    Categories("Watches", "assests/images/smartwatch.png"),
-    Categories("Smartphones", "assests/images/phone.png"),
-    Categories("Tablets", "assests/images/tablets.png"),
-    Categories("Women-Bags", "assests/images/bag.png"),
-    Categories("Sports-Accessories", "assests/images/sports.png"),
-    Categories("Sunglasses", "assests/images/sunglasses.png"),
-    Categories("Shoes", "assests/images/shoes.png"),
+  final List<CategoryModel> categories = [
+    CategoryModel(
+      name: "Beauty ",
+      imagePath: "assests/images/beauty.png",
+      slug: "beauty",
+      color:Colors.pink
+    ),
+    CategoryModel(
+        name: "Fragrances ",
+        imagePath: "assests/images/fragrance.png",
+        slug: "fragrances",
+        color:Colors.green),
+    CategoryModel(
+      name: "Laptops ",
+      imagePath: "assests/images/laptop.png",
+      slug: "laptops",
+      color:Colors.lightBlue
+    ),
+    CategoryModel(
+      name: "Groceries ",
+      imagePath: "assests/images/grocery.png",
+      slug: "groceries",
+      color:const Color.fromARGB(255, 249, 197, 7)
+    ),
+    CategoryModel(
+      name: "Furniture ",
+      imagePath: "assests/images/furniture.png",
+      slug: "furniture",
+      color:Colors.orangeAccent
+    ),
+    CategoryModel(
+      name: "Watches ",
+      imagePath: "assests/images/smartwatch.png",
+      slug: "mens-watches",
+      color:Colors.purpleAccent
+    ),
+    CategoryModel(
+      name: "Smartphones",
+      imagePath: "assests/images/phone.png",
+      slug: "smartphones",
+      color:Colors.amber
+    ),
+    CategoryModel(
+      name: "Tablelets",
+      imagePath: "assests/images/tablets.png",
+      slug: "tablets",
+      color:Colors.red
+    ),
+    CategoryModel(
+        name: "Women-Bags ",
+        imagePath: "assests/images/bag.png",
+        slug: "womens-bags",
+        color:Colors.purple),
+        
+    CategoryModel(
+      name: " Sports-Accessories",
+      imagePath: "assests/images/sports.png",
+      slug: "sports-accessories",
+      color:Colors.brown
+    ),
+    CategoryModel(
+      name: "Sunglasses",
+      imagePath: "assests/images/sunglasses.png",
+      slug: "sunglasses",
+      color:Colors.lightBlue
+    ),
+    CategoryModel(
+      name: "Mens-Shoes ",
+      imagePath: "assests/images/shoes.png",
+      slug: "mens-shoes",
+      color:Colors.black
+    ),
+    CategoryModel(
+      name: "Vehicle",
+      imagePath: "assests/images/beauty.png",
+      slug: "vehicle",
+      color:const Color.fromARGB(255, 196, 83, 42)
+    ),
   ];
 
   List carosulImage = [
@@ -144,7 +210,13 @@ class _HomepageState extends State<Homepage> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Categorypage(categories: categories)));
+                    },
                     child: Row(
                       children: [
                         Text("View All",
@@ -169,7 +241,16 @@ class _HomepageState extends State<Homepage> {
                   itemCount: categories.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return CategoryItem(category: categories[index]);
+                    return CategoryItem(
+                      category: categories[index],
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                    slug: categories[index].slug)));
+                      },
+                    );
                   }),
             ),
             SizedBox(
@@ -239,44 +320,43 @@ class CarouselItem extends StatelessWidget {
 }
 
 class CategoryItem extends StatelessWidget {
-  final Categories category;
+  final CategoryModel category;
+  final VoidCallback onTap; // Callback for handling tap
+
   const CategoryItem({
-    super.key,
+    Key? key,
     required this.category,
-  });
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            child: Image.asset(
-              category.categoryimages,
-              width: 43,
-              height: 45,
-              fit: BoxFit.contain,
+    return GestureDetector(
+      onTap: onTap, // Handle tap
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              child: Image.asset(
+                category.imagePath,
+                width: 43,
+                height: 45,
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          Text(
-            category.categoryName,
-            style:
-                TextStyle(color: Colors.black54, fontWeight: FontWeight.bold),
-          )
-        ],
+            const SizedBox(height: 3),
+            Text(
+              category.name,
+              style: const TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-}
-
-class Categories {
-  final String categoryimages;
-  final String categoryName;
-
-  Categories(this.categoryName, this.categoryimages);
 }

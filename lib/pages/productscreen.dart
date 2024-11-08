@@ -1,15 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
 import 'package:electronic_ecommerce/model/productmodel.dart';
 import 'package:electronic_ecommerce/pages/detailproduct.dart';
 import 'package:electronic_ecommerce/services/product_services.dart';
-import 'package:flutter/material.dart';
 
-class AllProduct extends StatelessWidget {
-  const AllProduct({super.key});
+class ProductScreen extends StatelessWidget {
+  final String slug;
+  const ProductScreen({
+    super.key,
+    required this.slug,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ProductServices().getAllProductData(),
+        future: ProductServices().getProductsByCategory(slug),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Scaffold(
@@ -35,7 +41,7 @@ class AllProduct extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             var data = snapshot.data as List<ProductModel>;
-            
+
             return Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -83,8 +89,9 @@ class AllProduct extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                           DetailPage(productId:data[index].id!,)));
+                                      builder: (context) => DetailPage(
+                                            productId: data[index].id!,
+                                          )));
                             },
                             child: Card(
                               child: Padding(
@@ -124,7 +131,8 @@ class AllProduct extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 4),
                                     Padding(
-                                     padding: EdgeInsets.only(left: 10,right: 8),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -143,10 +151,6 @@ class AllProduct extends StatelessWidget {
                                                 ),
                                                 textAlign: TextAlign.left,
                                               ),
-                                              Container(
-                            decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.circular(5)),
-                        child: Icon(Icons.add,size: 20,),
-                      )
                                             ],
                                           ),
                                           Row(
@@ -181,7 +185,6 @@ class AllProduct extends StatelessWidget {
                   ],
                 ),
               ),
-              
             );
           } else {
             return const Center(
