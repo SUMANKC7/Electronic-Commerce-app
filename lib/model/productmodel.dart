@@ -23,4 +23,6 @@ class ProductModel {
     thumbnail = json['thumbnail'];
     discountPercentage = (json["discountPercentage"] as num).toDouble();
   }
+
+  
 }

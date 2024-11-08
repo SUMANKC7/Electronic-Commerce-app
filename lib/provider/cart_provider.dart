@@ -1,0 +1,51 @@
+import 'package:electronic_ecommerce/features/product.dart';
+import 'package:electronic_ecommerce/model/cartmodel.dart';
+import 'package:flutter/material.dart';
+
+import '../model/productmodel.dart';
+
+class CartProvider extends ChangeNotifier {
+  final List<Cartmodel> _items = [];
+
+  List<Cartmodel> get items => _items;
+
+  void add(ProductModel product) {
+    final existingIndex =
+        _items.indexWhere((item) => item.product.id == product.id);
+    if (existingIndex >= 0) {
+      _items[existingIndex].quantity++;
+    } else {
+      _items.add(Cartmodel(product: product));
+    }
+    notifyListeners();
+  }
+
+  void remove(int productid) {
+    _items.removeWhere((item) => item.product.id == productid);
+    notifyListeners();
+  }
+
+  void decreaseQuantity(int productId) {
+    final existingIndex =
+        _items.indexWhere((item) => item.product.id == productId);
+
+    if (existingIndex >= 0) {
+      if (_items[existingIndex].quantity > 1) {
+        _items[existingIndex].quantity--;
+      } else {
+        _items.removeAt(existingIndex);
+      }
+    }
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _items.clear();
+    notifyListeners();
+  }
+
+  double get TotalAmt {
+    return _items.fold(
+        0.0, (sum, item) => sum + (item.product.price ?? 0.0) * item.quantity);
+  }
+}

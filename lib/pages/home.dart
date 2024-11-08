@@ -1,3 +1,4 @@
+import 'package:electronic_ecommerce/model/categorymodel.dart';
 import 'package:electronic_ecommerce/pages/accountpage.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/categorypage.dart';
@@ -7,37 +8,42 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+  final List<CategoryModel> categories;
+
+  const Homescreen({super.key, required this.categories});
 
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
 
 class _HomescreenState extends State<Homescreen> {
-  static final List<Widget> _pages = <Widget>[
-    Homepage(),
-    Categorypage(),
-    Cartpage(),
-    MyAccount()
-  ];
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the _pages list here, where widget.categories is available
+    _pages = <Widget>[
+      Homepage(),
+       // Pass widget.categories here
+      Cartpage(),
+      MyAccount()
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     final bottomNavProvider = Provider.of<BottomNavProvider>(context);
 
     return Scaffold(
-      body:
-          _pages[bottomNavProvider.SelectedIndex], // Display the selected page
+      body: _pages[bottomNavProvider.SelectedIndex], // Display the selected page
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Category',
-          ),
+         
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',
@@ -57,5 +63,3 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 }
-
-// Sample pages for each tab
