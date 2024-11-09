@@ -26,7 +26,7 @@ class _HomescreenState extends State<Homescreen> {
     _pages = <Widget>[
       Homepage(),
        // Pass widget.categories here
-      Cartpage(),
+      CartPage(),
       MyAccount()
     ];
   }

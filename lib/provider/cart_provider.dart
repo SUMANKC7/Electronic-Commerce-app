@@ -1,4 +1,4 @@
-import 'package:electronic_ecommerce/features/product.dart';
+
 import 'package:electronic_ecommerce/model/cartmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,7 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double get TotalAmt {
+  double get totalAmt {
     return _items.fold(
         0.0, (sum, item) => sum + (item.product.price ?? 0.0) * item.quantity);
   }
