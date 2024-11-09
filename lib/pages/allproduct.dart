@@ -1,13 +1,18 @@
 import 'package:electronic_ecommerce/model/productmodel.dart';
+import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/detailproduct.dart';
+import 'package:electronic_ecommerce/provider/cart_provider.dart';
 import 'package:electronic_ecommerce/services/product_services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AllProduct extends StatelessWidget {
   const AllProduct({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+
     return FutureBuilder(
         future: ProductServices().getAllProductData(),
         builder: (context, snapshot) {
@@ -35,10 +40,10 @@ class AllProduct extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             var data = snapshot.data as List<ProductModel>;
-            
+
             return Scaffold(
               body: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,7 +66,12 @@ class AllProduct extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CartPage()));
+                            },
                             icon: Icon(Icons.shopping_bag_outlined))
                       ],
                     ),
@@ -78,13 +88,15 @@ class AllProduct extends StatelessWidget {
                         ),
                         itemCount: data.length,
                         itemBuilder: (context, index) {
+                          final product = data[index];
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                           DetailPage(productId:data[index].id!,)));
+                                      builder: (context) => DetailPage(
+                                            productId: data[index].id!,
+                                          )));
                             },
                             child: Card(
                               child: Padding(
@@ -124,7 +136,8 @@ class AllProduct extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 4),
                                     Padding(
-                                     padding: EdgeInsets.only(left: 10,right: 8),
+                                      padding:
+                                          EdgeInsets.only(left: 10, right: 8),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -143,10 +156,32 @@ class AllProduct extends StatelessWidget {
                                                 ),
                                                 textAlign: TextAlign.left,
                                               ),
-                                              Container(
-                            decoration: BoxDecoration(color: Colors.orange,borderRadius: BorderRadius.circular(5)),
-                        child: Icon(Icons.add,size: 20,),
-                      )
+                                              GestureDetector(
+                                                onTap: () {
+                                                  cartProvider.add(product);
+
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          '${data[index].title} added to cart!'),
+                                                      duration: const Duration(
+                                                          seconds: 2),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.orange,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -167,6 +202,9 @@ class AllProduct extends StatelessWidget {
                                               )
                                             ],
                                           ),
+                                          SizedBox(
+                                            height: 7,
+                                          )
                                         ],
                                       ),
                                     ),
@@ -181,7 +219,6 @@ class AllProduct extends StatelessWidget {
                   ],
                 ),
               ),
-              
             );
           } else {
             return const Center(

@@ -168,7 +168,7 @@ class _DetailPageState extends State<DetailPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Cartpage()));
+                                    builder: (context) => CartPage()));
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(10, 52),
