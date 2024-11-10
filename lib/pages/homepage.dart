@@ -1,5 +1,6 @@
 import 'package:electronic_ecommerce/features/product.dart';
 import 'package:electronic_ecommerce/model/categorymodel.dart';
+import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/allproduct.dart';
 import 'package:electronic_ecommerce/pages/categorypage.dart';
 import 'package:electronic_ecommerce/pages/productscreen.dart';
@@ -16,82 +17,70 @@ class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   final List<CategoryModel> categories = [
     CategoryModel(
-      name: "Beauty ",
-      imagePath: "assests/images/beauty.png",
-      slug: "beauty",
-      color:Colors.pink
-    ),
+        name: "Beauty ",
+        imagePath: "assests/images/beauty.png",
+        slug: "beauty",
+        color: Colors.pink),
     CategoryModel(
         name: "Fragrances ",
         imagePath: "assests/images/fragrance.png",
         slug: "fragrances",
-        color:Colors.green),
+        color: Colors.green),
     CategoryModel(
-      name: "Laptops ",
-      imagePath: "assests/images/laptop.png",
-      slug: "laptops",
-      color:Colors.lightBlue
-    ),
+        name: "Laptops ",
+        imagePath: "assests/images/laptop.png",
+        slug: "laptops",
+        color: Colors.lightBlue),
     CategoryModel(
-      name: "Groceries ",
-      imagePath: "assests/images/grocery.png",
-      slug: "groceries",
-      color:const Color.fromARGB(255, 249, 197, 7)
-    ),
+        name: "Groceries ",
+        imagePath: "assests/images/grocery.png",
+        slug: "groceries",
+        color: const Color.fromARGB(255, 249, 197, 7)),
     CategoryModel(
-      name: "Furniture ",
-      imagePath: "assests/images/furniture.png",
-      slug: "furniture",
-      color:Colors.orangeAccent
-    ),
+        name: "Furniture ",
+        imagePath: "assests/images/furniture.png",
+        slug: "furniture",
+        color: Colors.orangeAccent),
     CategoryModel(
-      name: "Watches ",
-      imagePath: "assests/images/smartwatch.png",
-      slug: "mens-watches",
-      color:Colors.purpleAccent
-    ),
+        name: "Watches ",
+        imagePath: "assests/images/smartwatch.png",
+        slug: "mens-watches",
+        color: Colors.purpleAccent),
     CategoryModel(
-      name: "Smartphones",
-      imagePath: "assests/images/phone.png",
-      slug: "smartphones",
-      color:Colors.amber
-    ),
+        name: "Smartphones",
+        imagePath: "assests/images/phone.png",
+        slug: "smartphones",
+        color: Colors.amber),
     CategoryModel(
-      name: "Tablelets",
-      imagePath: "assests/images/tablets.png",
-      slug: "tablets",
-      color:Colors.red
-    ),
+        name: "Tablelets",
+        imagePath: "assests/images/tablets.png",
+        slug: "tablets",
+        color: Colors.red),
     CategoryModel(
         name: "Women-Bags ",
         imagePath: "assests/images/bag.png",
         slug: "womens-bags",
-        color:Colors.purple),
-        
+        color: Colors.purple),
     CategoryModel(
-      name: " Sports-Accessories",
-      imagePath: "assests/images/sports.png",
-      slug: "sports-accessories",
-      color:Colors.brown
-    ),
+        name: " Sports-Accessories",
+        imagePath: "assests/images/sports.png",
+        slug: "sports-accessories",
+        color: Colors.brown),
     CategoryModel(
-      name: "Sunglasses",
-      imagePath: "assests/images/sunglasses.png",
-      slug: "sunglasses",
-      color:Colors.lightBlue
-    ),
+        name: "Sunglasses",
+        imagePath: "assests/images/sunglasses.png",
+        slug: "sunglasses",
+        color: Colors.lightBlue),
     CategoryModel(
-      name: "Mens-Shoes ",
-      imagePath: "assests/images/shoes.png",
-      slug: "mens-shoes",
-      color:Colors.black
-    ),
+        name: "Mens-Shoes ",
+        imagePath: "assests/images/shoes.png",
+        slug: "mens-shoes",
+        color: Colors.black),
     CategoryModel(
-      name: "Vehicle",
-      imagePath: "assests/images/beauty.png",
-      slug: "vehicle",
-      color:const Color.fromARGB(255, 196, 83, 42)
-    ),
+        name: "Vehicle",
+        imagePath: "assests/images/beauty.png",
+        slug: "vehicle",
+        color: const Color.fromARGB(255, 196, 83, 42)),
   ];
 
   List carosulImage = [
@@ -120,7 +109,12 @@ class _HomepageState extends State<Homepage> {
                     MaterialPageRoute(builder: (context) => Homepage()));
               },
               icon: const Icon(Icons.notifications)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CartPage()));
+              },
+              icon: const Icon(Icons.shopping_bag)),
           const SizedBox(
             width: 10,
           )

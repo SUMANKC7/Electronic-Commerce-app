@@ -5,6 +5,8 @@ import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/home.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
 import 'package:electronic_ecommerce/provider/bottom_nav.dart';
+import 'package:electronic_ecommerce/provider/buynow_provider.dart';
+
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_)=>BottomNavProvider()),
         ChangeNotifierProvider(create: (_)=>CartProvider()),
+        ChangeNotifierProvider(create: (_)=>BuyNowProvider(0.0)),
+        
       ],
     child: const ElectronicCommerce()
     )
