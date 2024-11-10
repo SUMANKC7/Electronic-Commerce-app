@@ -1,10 +1,11 @@
+
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +123,7 @@ class CartPage extends StatelessWidget {
                 // Total and Checkout Button
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
+                  decoration:const BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -158,18 +159,21 @@ class CartPage extends StatelessWidget {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Proceeding to checkout...'),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     content: Text('Proceeding to checkout...'),
+                          //     duration: Duration(seconds: 2),
+                          //   ),
+                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>Buynow(productId: productId)));
+                          
+                          
                         },
-                        child: const Text('Proceed to Checkout'),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           textStyle: const TextStyle(fontSize: 18),
+                          backgroundColor: Colors.deepOrange
                         ),
+                        child: const Text('Proceed to Checkout',style: TextStyle(color: Colors.white),),
                       ),
                     ],
                   ),
