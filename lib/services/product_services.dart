@@ -19,8 +19,8 @@ class ProductServices {
     }
   }
 
-  Future<List<ProductModel>> getAllProductData() async {
-    List<ProductModel> allProducts = [];
+  Future<List<Detailproductmodel>> getAllProductData() async {
+    List<Detailproductmodel> allProducts = [];
 
     try {
       List<String> categoryUrls = await getAllCategoryUrls();
@@ -33,7 +33,7 @@ class ProductServices {
           // Check if "products" exists in the decoded data
           if (decodedData["products"] != null) {
             for (var product in decodedData["products"]) {
-              allProducts.add(ProductModel.fromJson(product));
+              allProducts.add(Detailproductmodel.fromJson(product));
             }
           }
         } else {
@@ -69,7 +69,7 @@ class ProductServices {
 
   
 
-  Future<List<ProductModel>> getProductsByCategory(String slug) async {
+ Future<List<ProductModel>> getProductsByCategory(String slug) async {
   final url = 'https://dummyjson.com/products/category/$slug';
   var response = await http.get(Uri.parse(url));
 

@@ -1,7 +1,6 @@
 import 'package:electronic_ecommerce/model/categorymodel.dart';
 import 'package:electronic_ecommerce/pages/accountpage.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
-import 'package:electronic_ecommerce/pages/categorypage.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
 import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:flutter/material.dart';

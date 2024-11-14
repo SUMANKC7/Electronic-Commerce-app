@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:electronic_ecommerce/features/map.dart';
+import 'package:electronic_ecommerce/pages/payment.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,26 +42,26 @@ class _BuynowState extends State<Buynow> {
                       body: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Container(
-                              decoration:
-                                  BoxDecoration(border: Border.all(width: 2)),
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(10),
-                                highlightColor: Colors.green,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MapPage()));
-                                },
-                                child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.15,
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.94,
-                                    child: MapPage()),
-                              ),
-                            ),
+                            // Container(
+                            //   decoration:
+                            //       BoxDecoration(border: Border.all(width: 2)),
+                            //   child: InkWell(
+                            //     borderRadius: BorderRadius.circular(10),
+                            //     highlightColor: Colors.green,
+                            //     onTap: () {
+                            //       Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) => MapPage()));
+                            //     },
+                            //     child: SizedBox(
+                            //         height:
+                            //             MediaQuery.sizeOf(context).height * 0.15,
+                            //         width:
+                            //             MediaQuery.sizeOf(context).width * 0.94,
+                            //         child: MapPage()),
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -125,7 +126,7 @@ class _BuynowState extends State<Buynow> {
                                                 SizedBox(
                                                   width: 7,
                                                 ),
-                                                Text("1",
+                                                Text("${buyNowProvider.quantity}",
                                                     style:
                                                         TextStyle(fontSize: 19)),
                                                 SizedBox(
@@ -333,9 +334,9 @@ class _BuynowState extends State<Buynow> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => Buynow(
-                                                    productId:
-                                                        widget.productId)));
+                                                builder: (context) =>Payment()
+                                                        )
+                                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                           minimumSize: Size(10, 52),

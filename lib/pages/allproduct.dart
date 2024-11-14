@@ -1,4 +1,4 @@
-import 'package:electronic_ecommerce/model/productmodel.dart';
+import 'package:electronic_ecommerce/model/detailproductmodel.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/detailproduct.dart';
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
@@ -39,7 +39,7 @@ class AllProduct extends StatelessWidget {
               ),
             );
           } else if (snapshot.hasData) {
-            var data = snapshot.data as List<ProductModel>;
+            var data = snapshot.data as List<Detailproductmodel>;
 
             return Scaffold(
               body: Padding(
@@ -89,6 +89,7 @@ class AllProduct extends StatelessWidget {
                         itemCount: data.length,
                         itemBuilder: (context, index) {
                           final product = data[index];
+
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -110,7 +111,7 @@ class AllProduct extends StatelessWidget {
                                         padding: const EdgeInsets.only(top: 10),
                                         child: Center(
                                           child: Image.network(
-                                            data[index].thumbnail ??
+                                            data[index].productImage ??
                                                 "https://via.placeholder.com/150",
                                             fit: BoxFit.cover,
                                             errorBuilder:
@@ -125,7 +126,7 @@ class AllProduct extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 10),
                                     Text(
-                                      data[index].title ?? "No title",
+                                      data[index].producttitle ?? "No title",
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -147,7 +148,7 @@ class AllProduct extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "\$${data[index].price!.toStringAsFixed(2)}",
+                                                "\$${data[index].productPrice!.toStringAsFixed(2)}",
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.w900,
                                                   color: Color.fromARGB(
@@ -164,7 +165,7 @@ class AllProduct extends StatelessWidget {
                                                       .showSnackBar(
                                                     SnackBar(
                                                       content: Text(
-                                                          '${data[index].title} added to cart!'),
+                                                          '${data[index].producttitle} added to cart!'),
                                                       duration: const Duration(
                                                           seconds: 2),
                                                     ),
@@ -187,7 +188,7 @@ class AllProduct extends StatelessWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                "Rating: ${data[index].rating!.toStringAsFixed(1)}",
+                                                "Rating: ${data[index].productRating!.toStringAsFixed(1)}",
                                                 style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,

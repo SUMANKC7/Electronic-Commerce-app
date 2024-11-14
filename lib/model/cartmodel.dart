@@ -1,13 +1,12 @@
-import 'package:electronic_ecommerce/model/productmodel.dart';
+import 'package:electronic_ecommerce/model/detailproductmodel.dart';
+
 
 class Cartmodel {
-  final ProductModel product;
+  final Detailproductmodel product;
   int quantity;
 
-  Cartmodel(
-    {
-     required this.product,
-     this.quantity=1,
-    }
-  );
+  Cartmodel({
+    required this.product,
+    this.quantity = 1,
+  });
 }

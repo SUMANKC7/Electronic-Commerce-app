@@ -16,7 +16,7 @@ class BuyNowProvider extends ChangeNotifier {
   }
 
   void decreaseQuantity() {
-    if (quantity >= 1) {
+    if (quantity > 1) {
       quantity--;
       notifyListeners();
     }

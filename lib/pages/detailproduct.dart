@@ -1,8 +1,13 @@
+
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/buynow.dart';
+
+import 'package:electronic_ecommerce/provider/cart_provider.dart';
 import 'package:electronic_ecommerce/services/product_services.dart';
 import 'package:flutter/material.dart';
-import 'package:electronic_ecommerce/model/detailproductmodel.dart';
+
+import 'package:provider/provider.dart';
+
 
 // ignore: must_be_immutable
 class DetailPage extends StatefulWidget {
@@ -20,8 +25,9 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
-   
-    return FutureBuilder<Detailproductmodel>(
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+
+    return FutureBuilder(
       future: ProductServices().getProductById(widget.productId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -35,7 +41,12 @@ class _DetailPageState extends State<DetailPage> {
             appBar: AppBar(
               title: Center(child: Text("Product Details")),
               actions: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag)),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => CartPage()));
+                    },
+                    icon: Icon(Icons.shopping_bag)),
               ],
             ),
             body: Column(
@@ -165,10 +176,13 @@ class _DetailPageState extends State<DetailPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CartPage()));
+                             cartProvider.add(product);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('added to cart!'),
+                                duration: const Duration(seconds: 2),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(10, 52),
