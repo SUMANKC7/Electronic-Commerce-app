@@ -1,3 +1,5 @@
+
+
 class Detailproductmodel {
   String? productImage;
   int? id;
@@ -37,4 +39,6 @@ class Detailproductmodel {
       otherImages = [];
     }
   }
+
+
 }

@@ -1,8 +1,8 @@
-
+import 'package:electronic_ecommerce/pages/buynow.dart';
+import 'package:electronic_ecommerce/pages/checkout.dart';
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -22,9 +22,11 @@ class CartPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.shopping_cart_outlined, size: 100, color: Colors.grey),
+                  const Icon(Icons.shopping_cart_outlined,
+                      size: 100, color: Colors.grey),
                   const SizedBox(height: 10),
-                  const Text("Your cart is empty!", style: TextStyle(fontSize: 18)),
+                  const Text("Your cart is empty!",
+                      style: TextStyle(fontSize: 18)),
                 ],
               ),
             )
@@ -50,7 +52,8 @@ class CartPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                      cartItem.product.thumbnail ?? "https://via.placeholder.com/150",
+                                      cartItem.product.productImage ??
+                                          "https://via.placeholder.com/150",
                                     ),
                                     fit: BoxFit.cover,
                                   ),
@@ -64,15 +67,19 @@ class CartPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      cartItem.product.title ?? "Product Name",
-                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                      cartItem.product.producttitle ??
+                                          "Product Name",
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      "\$${cartItem.product.price?.toStringAsFixed(2) ?? '0.00'}",
-                                      style: const TextStyle(fontSize: 16, color: Colors.orange),
+                                      "\$${cartItem.product.productPrice?.toStringAsFixed(2) ?? '0.00'}",
+                                      style: const TextStyle(
+                                          fontSize: 16, color: Colors.orange),
                                     ),
                                   ],
                                 ),
@@ -82,9 +89,11 @@ class CartPage extends StatelessWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                    icon: const Icon(Icons.remove_circle_outline),
+                                    icon:
+                                        const Icon(Icons.remove_circle_outline),
                                     onPressed: () {
-                                      cartProvider.decreaseQuantity(cartItem.product.id!);
+                                      cartProvider.decreaseQuantity(
+                                          cartItem.product.id!);
                                     },
                                   ),
                                   Text(
@@ -102,7 +111,8 @@ class CartPage extends StatelessWidget {
 
                               // Delete Item
                               IconButton(
-                                icon: const Icon(Icons.delete, color: Colors.red),
+                                icon:
+                                    const Icon(Icons.delete, color: Colors.red),
                                 onPressed: () {
                                   cartProvider.remove(cartItem.product.id!);
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -123,7 +133,7 @@ class CartPage extends StatelessWidget {
                 // Total and Checkout Button
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration:const BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -159,21 +169,22 @@ class CartPage extends StatelessWidget {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //   const SnackBar(
-                          //     content: Text('Proceeding to checkout...'),
-                          //     duration: Duration(seconds: 2),
-                          //   ),
-                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>Buynow(productId: productId)));
-                          
-                          
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                     CheckoutPage (cartItems: cartItems)
+                                     )
+                                     );
                         },
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          textStyle: const TextStyle(fontSize: 18),
-                          backgroundColor: Colors.deepOrange
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            textStyle: const TextStyle(fontSize: 18),
+                            backgroundColor: Colors.deepOrange),
+                        child: const Text(
+                          'Proceed to Checkout',
+                          style: TextStyle(color: Colors.white),
                         ),
-                        child: const Text('Proceed to Checkout',style: TextStyle(color: Colors.white),),
                       ),
                     ],
                   ),

@@ -1,15 +1,15 @@
-
 import 'package:electronic_ecommerce/model/cartmodel.dart';
+import 'package:electronic_ecommerce/model/detailproductmodel.dart';
 import 'package:flutter/material.dart';
 
-import '../model/productmodel.dart';
+
 
 class CartProvider extends ChangeNotifier {
   final List<Cartmodel> _items = [];
 
   List<Cartmodel> get items => _items;
 
-  void add(ProductModel product) {
+  void add(Detailproductmodel product) {
     final existingIndex =
         _items.indexWhere((item) => item.product.id == product.id);
     if (existingIndex >= 0) {
@@ -46,6 +46,6 @@ class CartProvider extends ChangeNotifier {
 
   double get totalAmt {
     return _items.fold(
-        0.0, (sum, item) => sum + (item.product.price ?? 0.0) * item.quantity);
+        0.0, (sum, item) => sum + (item.product.productPrice ?? 0.0) * item.quantity);
   }
 }
