@@ -1,6 +1,6 @@
 import 'package:electronic_ecommerce/model/cartmodel.dart';
 import 'package:electronic_ecommerce/pages/addressDetail.dart';
-import 'package:electronic_ecommerce/pages/payment.dart';
+import 'package:electronic_ecommerce/pages/payment/payment.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
