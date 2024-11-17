@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>Scan your card to add it automatically</string>
 	<key>CFBundleDisplayName</key>
 	<string>Electronic Ecommerce</string>
 	<key>CFBundleExecutable</key>

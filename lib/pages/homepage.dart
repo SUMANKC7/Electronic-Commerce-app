@@ -1,9 +1,9 @@
-import 'package:electronic_ecommerce/features/product.dart';
 import 'package:electronic_ecommerce/model/categorymodel.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/allproduct.dart';
 import 'package:electronic_ecommerce/pages/categorypage.dart';
 import 'package:electronic_ecommerce/pages/productscreen.dart';
+import 'package:electronic_ecommerce/pages/top%20_deals.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget {
@@ -92,61 +92,64 @@ class _HomepageState extends State<Homepage> {
     "assests/carosuelImage/banner.png",
   ];
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: _globalKey,
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              _globalKey.currentState?.openDrawer();
-            },
-            icon: const Icon(Icons.menu)),
-        title: const Text("Home"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Homepage()));
-              },
-              icon: const Icon(Icons.notifications)),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CartPage()));
-              },
-              icon: const Icon(Icons.shopping_bag)),
-          const SizedBox(
-            width: 10,
-          )
-        ],
+Widget build(BuildContext context) {
+  return Scaffold(
+    key: _globalKey,
+    appBar: AppBar(
+      leading: IconButton(
+        onPressed: () {
+          _globalKey.currentState?.openDrawer();
+        },
+        icon: const Icon(Icons.menu),
       ),
-      drawer: Drawer(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: ListView(
-            children: [
-              DrawerHeader(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(color: Colors.green),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "assests/images/file.png",
-                        width: MediaQuery.of(context).size.width * 0.25,
-                      ),
-                      Text(
-                        "Suman KC",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  )),
-              ListTile(
-                leading: Icon(Icons.wallet),
-                title: Text("Order"),
-                onTap: () {},
-              ),
-              ListTile(
+      title: const Text("Home"),
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Homepage()),
+            );
+          },
+          icon: const Icon(Icons.notifications),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CartPage()),
+            );
+          },
+          icon: const Icon(Icons.shopping_bag),
+        ),
+        const SizedBox(width: 10),
+      ],
+    ),
+    drawer: Drawer(
+      child: ListView(
+        children: [
+          DrawerHeader(
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            decoration: const BoxDecoration(color: Colors.green),
+            child: Column(
+              children: [
+                Image.asset(
+                  "assests/images/file.png",
+                  width: MediaQuery.of(context).size.width * 0.25,
+                ),
+                const Text(
+                  "Suman KC",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.wallet),
+            title: const Text("Order"),
+            onTap: () {},
+          ),
+            ListTile(
                 leading: Icon(Icons.message),
                 title: Text("Message"),
                 onTap: () {},
@@ -166,130 +169,137 @@ class _HomepageState extends State<Homepage> {
                 title: Text("Account "),
                 onTap: () {},
               ),
-            ],
-          ),
-        ),
+          
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.sizeOf(context).height * 0.1,
-              padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 15, bottom: 10),
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
-                  hintText: " Search Anything...",
-                  hintStyle: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+    ),
+    body: SingleChildScrollView(
+      child: Column(
+        children: [
+          // Search Bar Section
+          Container(
+            height: MediaQuery.sizeOf(context).height * 0.1,
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
+            child: TextField(
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search, size: 30),
+                hintText: "Search Anything...",
+                hintStyle: const TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.grey,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Categories",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Categorypage(categories: categories)));
-                    },
-                    child: Row(
-                      children: [
-                        Text("View All",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.grey)),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.15,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: categories.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return CategoryItem(
-                      category: categories[index],
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductScreen(
-                                    slug: categories[index].slug)));
-                      },
+          ),
+          // Categories Section
+          Padding(
+            padding: const EdgeInsets.only(left: 25, right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Categories",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Categorypage(categories: categories),
+                      ),
                     );
-                  }),
-            ),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.15,
-              child: CarouselItem(carosulImage: carosulImage),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Top Deals",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AllProduct()));
-                    },
-                    child: Row(
-                      children: [
-                        Text("All Products",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.grey)),
-                        Icon(
-                          Icons.arrow_forward,
+                  },
+                  child: Row(
+                    children: const [
+                      Text(
+                        "View All",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
                           color: Colors.grey,
-                        )
-                      ],
-                    ),
+                        ),
+                      ),
+                      Icon(Icons.arrow_forward, color: Colors.grey),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            ProductView()
-          ],
-        ),
+          ),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.15,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: categories.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return CategoryItem(
+                  category: categories[index],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(slug: categories[index].slug),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+          // Carousel Section
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.15,
+            child: CarouselItem(carosulImage: carosulImage),
+          ),
+          // Top Deals Section
+          Padding(
+            padding: const EdgeInsets.only(left: 25, right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Top Deals",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AllProduct()),
+                    );
+                  },
+                  child: Row(
+                    children: const [
+                      Text(
+                        "All Products",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Icon(Icons.arrow_forward, color: Colors.grey),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        
+           TopDeals(),
+        
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
 
 class CarouselItem extends StatelessWidget {

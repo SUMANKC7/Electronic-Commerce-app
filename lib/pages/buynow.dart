@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:electronic_ecommerce/features/map.dart';
-import 'package:electronic_ecommerce/pages/payment.dart';
+import 'package:electronic_ecommerce/pages/payment/payment.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

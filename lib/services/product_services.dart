@@ -83,6 +83,20 @@ class ProductServices {
   }
 }
 
+Future<List<Detailproductmodel>> getTopDeal() async{
+  const url="https://dummyjson.com/products/category/sports-accessories";
+  var response=await http.get(Uri.parse(url));
+
+  if(response.statusCode==200){
+    var decodedData=jsonDecode(response.body);
+    return(decodedData["products"] as List).map((product)=>Detailproductmodel.fromJson(product)).toList();
+  }else{
+       throw Exception("Failed to load products ");  
+  }
+
+
+
+}
 
 
 }
