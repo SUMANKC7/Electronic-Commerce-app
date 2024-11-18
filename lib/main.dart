@@ -4,26 +4,29 @@ import 'package:electronic_ecommerce/features/map.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/home.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
+import 'package:electronic_ecommerce/pages/payment/consts.dart';
 import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_)=>BottomNavProvider()),
-        ChangeNotifierProvider(create: (_)=>CartProvider()),
-        ChangeNotifierProvider(create: (_)=>BuyNowProvider(0.0)),
-        
-      ],
-    child: const ElectronicCommerce()
-    )
-    );
+void main() async {
+  await _setup();
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => BottomNavProvider()),
+    ChangeNotifierProvider(create: (_) => CartProvider()),
+    ChangeNotifierProvider(create: (_) => BuyNowProvider(0.0)),
+  ], child: const ElectronicCommerce()));
 }
+
+Future<void> _setup() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = stripePublishableKey;
+}
+
 class ElectronicCommerce extends StatelessWidget {
   const ElectronicCommerce({super.key});
 
@@ -31,17 +34,18 @@ class ElectronicCommerce extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: MaterialApp(
-       debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         title: "E-Commerce App",
-      
         initialRoute: "home",
         routes: {
-          "loginpage":(context)=>const Loginpage(),
-          "signuppage":(context)=>const SignUppage(),
-          "homepage":(context)=>const Homepage(),
-          "home":(context)=> Homescreen(categories: [],),
-          "map":(context)=>MapPage(),
-          "cartpage":(context)=>CartPage(),
+          "loginpage": (context) => const Loginpage(),
+          "signuppage": (context) => const SignUppage(),
+          "homepage": (context) => const Homepage(),
+          "home": (context) => Homescreen(
+                categories: [],
+              ),
+          "map": (context) => MapPage(),
+          "cartpage": (context) => CartPage(),
         },
       ),
     );

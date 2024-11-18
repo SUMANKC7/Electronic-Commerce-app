@@ -2,6 +2,7 @@
 import 'package:electronic_ecommerce/features/map.dart';
 import 'package:electronic_ecommerce/pages/payment/payment.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
+import 'package:electronic_ecommerce/services/stripe_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -331,12 +332,7 @@ class _BuynowState extends State<Buynow> {
                                   SizedBox(
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>Payment()
-                                                        )
-                                                        );
+                                        StripeService.instance.makePayment();
                                       },
                                       style: ElevatedButton.styleFrom(
                                           minimumSize: Size(10, 52),
