@@ -2,23 +2,23 @@ import 'package:dio/dio.dart';
 import 'package:electronic_ecommerce/pages/payment/consts.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-
 class StripeService {
   StripeService._();
 
   static final StripeService instance = StripeService._();
 
-  Future<void> makePayment() async {
+  Future<void> makePayment(double totalAmt) async {
     try {
+      int amountInCents = totalAmt .toInt();
       String? paymentIntentClientSecret = await _createPaymentIntent(
-        100,
+        amountInCents,
         "usd",
       );
       if (paymentIntentClientSecret == null) return;
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
           paymentIntentClientSecret: paymentIntentClientSecret,
-          merchantDisplayName: "Hussain Mustafa",
+          merchantDisplayName: "Suman KC",
         ),
       );
       await _processPayment();

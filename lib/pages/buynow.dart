@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:electronic_ecommerce/features/map.dart';
-import 'package:electronic_ecommerce/pages/payment/payment.dart';
+
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 import 'package:electronic_ecommerce/services/stripe_services.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,7 +35,7 @@ class _BuynowState extends State<Buynow> {
               var product = snapshot.data!;
 
               return ChangeNotifierProvider(
-                 create: (_) => BuyNowProvider(product.productPrice ?? 0.0),
+                create: (_) => BuyNowProvider(product.productPrice ?? 0.0),
                 child: Consumer<BuyNowProvider>(
                   builder: (context, buyNowProvider, child) {
                     return Scaffold(
@@ -85,7 +84,8 @@ class _BuynowState extends State<Buynow> {
                                     Row(
                                       children: [
                                         Image.network(
-                                          product.productImage ?? "Product Image",
+                                          product.productImage ??
+                                              "Product Image",
                                           fit: BoxFit.contain,
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -101,13 +101,15 @@ class _BuynowState extends State<Buynow> {
                                               children: [
                                                 Text(
                                                   "Quantity:",
-                                                  style: TextStyle(fontSize: 17),
+                                                  style:
+                                                      TextStyle(fontSize: 17),
                                                 ),
                                                 SizedBox(
                                                   width: 30,
                                                 ),
                                                 GestureDetector(
-                                                  onTap: buyNowProvider.decreaseQuantity,
+                                                  onTap: buyNowProvider
+                                                      .decreaseQuantity,
                                                   child: Container(
                                                     width: 24,
                                                     height: 24,
@@ -127,14 +129,16 @@ class _BuynowState extends State<Buynow> {
                                                 SizedBox(
                                                   width: 7,
                                                 ),
-                                                Text("${buyNowProvider.quantity}",
-                                                    style:
-                                                        TextStyle(fontSize: 19)),
+                                                Text(
+                                                    "${buyNowProvider.quantity}",
+                                                    style: TextStyle(
+                                                        fontSize: 19)),
                                                 SizedBox(
                                                   width: 7,
                                                 ),
                                                 GestureDetector(
-                                                  onTap:buyNowProvider.increaseQuantity,
+                                                  onTap: buyNowProvider
+                                                      .increaseQuantity,
                                                   child: Container(
                                                     width: 24,
                                                     height: 24,
@@ -164,14 +168,15 @@ class _BuynowState extends State<Buynow> {
                                               children: [
                                                 Text(
                                                   "Rating:",
-                                                  style: TextStyle(fontSize: 17),
+                                                  style:
+                                                      TextStyle(fontSize: 17),
                                                 ),
                                                 SizedBox(
                                                   width: 60,
                                                 ),
                                                 Text("${product.productRating}",
-                                                    style:
-                                                        TextStyle(fontSize: 16)),
+                                                    style: TextStyle(
+                                                        fontSize: 16)),
                                               ],
                                             ),
                                             SizedBox(
@@ -185,14 +190,16 @@ class _BuynowState extends State<Buynow> {
                                               children: [
                                                 Text(
                                                   "Price:",
-                                                  style: TextStyle(fontSize: 17),
+                                                  style:
+                                                      TextStyle(fontSize: 17),
                                                 ),
                                                 SizedBox(
                                                   width: 50,
                                                 ),
-                                                Text("\$${product.productPrice}",
-                                                    style:
-                                                        TextStyle(fontSize: 16)),
+                                                Text(
+                                                    "\$${product.productPrice}",
+                                                    style: TextStyle(
+                                                        fontSize: 16)),
                                               ],
                                             ),
                                             SizedBox(
@@ -216,7 +223,8 @@ class _BuynowState extends State<Buynow> {
                                     hintText: "Enter promo code",
                                     hintStyle: TextStyle(color: Colors.grey),
                                     border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10))),
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
                               ),
                             ),
                             SizedBox(
@@ -247,7 +255,8 @@ class _BuynowState extends State<Buynow> {
                                         SizedBox(
                                           width: 50,
                                         ),
-                                        Text("\$${buyNowProvider.productPrice.toStringAsFixed(2)}",
+                                        Text(
+                                            "\$${buyNowProvider.productPrice.toStringAsFixed(2)}",
                                             style: TextStyle(
                                               fontSize: 15,
                                             )),
@@ -271,7 +280,8 @@ class _BuynowState extends State<Buynow> {
                                         SizedBox(
                                           width: 50,
                                         ),
-                                        Text("\$${buyNowProvider.deliveryCharge}",
+                                        Text(
+                                            "\$${buyNowProvider.deliveryCharge}",
                                             style: TextStyle(
                                               fontSize: 15,
                                             )),
@@ -308,7 +318,8 @@ class _BuynowState extends State<Buynow> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 17),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   TextButton.icon(
                                       onPressed: () {},
@@ -332,7 +343,8 @@ class _BuynowState extends State<Buynow> {
                                   SizedBox(
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        StripeService.instance.makePayment();
+                                        double totalAmt = buyNowProvider.total;
+                                        StripeService.instance.makePayment(totalAmt);
                                       },
                                       style: ElevatedButton.styleFrom(
                                           minimumSize: Size(10, 52),

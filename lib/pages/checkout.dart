@@ -1,7 +1,8 @@
 import 'package:electronic_ecommerce/model/cartmodel.dart';
 import 'package:electronic_ecommerce/pages/addressDetail.dart';
-import 'package:electronic_ecommerce/pages/payment/payment.dart';
+
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
+import 'package:electronic_ecommerce/services/stripe_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -273,8 +274,8 @@ class CheckoutPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Payment()));
+                      double totalAmt=total;
+                       StripeService.instance.makePayment(totalAmt);
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(10, 52),
