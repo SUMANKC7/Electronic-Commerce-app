@@ -9,12 +9,15 @@ import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+WidgetsFlutterBinding.ensureInitialized();
   await _setup();
+  await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => BottomNavProvider()),
     ChangeNotifierProvider(create: (_) => CartProvider()),
@@ -23,7 +26,6 @@ void main() async {
 }
 
 Future<void> _setup() async {
-  WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = stripePublishableKey;
 }
 
@@ -36,7 +38,7 @@ class ElectronicCommerce extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "E-Commerce App",
-        initialRoute: "home",
+        initialRoute: "loginpage",
         routes: {
           "loginpage": (context) => const Loginpage(),
           "signuppage": (context) => const SignUppage(),
