@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:electronic_ecommerce/pages/detailproduct.dart';
 import 'package:electronic_ecommerce/provider/buynow_provider.dart';
 import 'package:electronic_ecommerce/services/stripe_services.dart';
 import 'package:flutter/cupertino.dart';
@@ -342,10 +343,35 @@ class _BuynowState extends State<Buynow> {
                                       )),
                                   SizedBox(
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                        double totalAmt = buyNowProvider.total;
-                                        StripeService.instance.makePayment(totalAmt);
-                                      },
+onPressed: () async {
+    // Sample total and product details (replace with actual data)
+    double totalAmt = 100.00; // Example amount
+    List<Map<String, dynamic>> productsDetails = [
+      {
+        "name": "Product 1",
+        "price": 50.00,
+        "quantity": 2,
+        "id": "product_1_id",
+      },
+    ];
+
+    print("Total amount: $totalAmt");
+    print("Products Details: $productsDetails");
+
+    // Trigger payment process
+    await PaymentService.makePayment(
+      totalAmt.toString(),
+      "usd",
+      {
+        "products": productsDetails,
+        "total": totalAmt,
+      },
+    );
+  },
+  
+                                        
+                                        
+                                      
                                       style: ElevatedButton.styleFrom(
                                           minimumSize: Size(10, 52),
                                           backgroundColor: const Color.fromARGB(

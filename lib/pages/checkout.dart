@@ -272,20 +272,40 @@ class CheckoutPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      double totalAmt=total;
-                       StripeService.instance.makePayment(totalAmt);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(10, 52),
-                      backgroundColor: Color.fromARGB(255, 252, 107, 3),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7)),
-                    ),
-                    child: Text("Place Order",
-                        style: TextStyle(fontSize: 18, color: Colors.white)),
-                  ),
+                 ElevatedButton(
+  onPressed: () {
+    double totalAmt = total;
+
+    // Extract product details from cartItems
+   List<Map<String, dynamic>> productsDetails = cartItems.map((item) {
+      return {
+        "name": item.product.producttitle ?? "Unknown Product",
+        "price": item.product.productPrice ?? 0.0,
+        "quantity": item.quantity,
+        "id": item.product.id, // Ensure `id` exists
+      };
+    }).toList();
+
+    // Pass the productsDetails and totalAmt to your payment service
+    PaymentService.makePayment(
+      totalAmt.toString(),
+      "usd",
+      {
+        "products": productsDetails,
+        "total": totalAmt,
+      },
+    );
+  },
+  style: ElevatedButton.styleFrom(
+    minimumSize: Size(10, 52),
+    backgroundColor: Color.fromARGB(255, 252, 107, 3),
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(7)),
+  ),
+  child: Text("Place Order",
+      style: TextStyle(fontSize: 18, color: Colors.white)),
+),
+
                 ],
               ),
             ),

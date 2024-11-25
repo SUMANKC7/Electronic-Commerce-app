@@ -1,13 +1,20 @@
+import 'dart:convert';
 
+import 'package:electronic_ecommerce/features/product.dart';
+import 'package:electronic_ecommerce/model/productmodel.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/buynow.dart';
+import 'package:electronic_ecommerce/pages/payment/consts.dart';
 
 import 'package:electronic_ecommerce/provider/cart_provider.dart';
+import 'package:electronic_ecommerce/services/database.dart';
 import 'package:electronic_ecommerce/services/product_services.dart';
+import 'package:electronic_ecommerce/services/shared_preference.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import "package:http/http.dart" as http;
 
 import 'package:provider/provider.dart';
-
 
 // ignore: must_be_immutable
 class DetailPage extends StatefulWidget {
@@ -23,6 +30,27 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  Map<String, dynamic>? paymentIntent;
+  late ProductModel? product;
+  String? name, email;
+
+  getthesharedpref() async {
+    name = await SharedPreferenceHelper().getUserName();
+    email = await SharedPreferenceHelper().getUserEmail();
+    setState(() {});
+  }
+
+  ontheload() async {
+    await getthesharedpref();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ontheload();
+  }
+
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
@@ -176,7 +204,7 @@ class _DetailPageState extends State<DetailPage> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                             cartProvider.add(product);
+                            cartProvider.add(product);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text('added to cart!'),
@@ -203,9 +231,8 @@ class _DetailPageState extends State<DetailPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Buynow(
-                                          productId: widget.productId
-                                        )));
+                                    builder: (context) =>
+                                        Buynow(productId: widget.productId)));
                           },
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(10, 52),
@@ -233,4 +260,6 @@ class _DetailPageState extends State<DetailPage> {
       },
     );
   }
+
+ 
 }
