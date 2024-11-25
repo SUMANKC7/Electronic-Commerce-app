@@ -1,8 +1,11 @@
 import 'package:electronic_ecommerce/authentication/loginpage.dart';
 import 'package:electronic_ecommerce/pages/home.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
+import 'package:electronic_ecommerce/services/database.dart';
+import 'package:electronic_ecommerce/services/shared_preference.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
 
 class SignUppage extends StatefulWidget {
   const SignUppage({super.key});
@@ -16,6 +19,7 @@ class _SignUppageState extends State<SignUppage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
@@ -34,6 +38,21 @@ class _SignUppageState extends State<SignUppage> {
             ),
           ),
         );
+        String Id = randomAlphaNumeric(10);
+        await SharedPreferenceHelper().saveUserEmail(emailController.text);
+        await SharedPreferenceHelper().saveUserImage(nameController.text);
+        await SharedPreferenceHelper().saveUserId(Id);
+        await SharedPreferenceHelper().saveUserImage("images/assests/carosuelImage/banner.png");
+        await SharedPreferenceHelper().saveUserNumber(phoneController.text);
+
+        Map<String, dynamic> userInfoMap = {
+          "Name": nameController.text,
+          "Email": emailController.text,
+          "Id": Id,
+          "Image": "images/assests/carosuelImage/banner.png",
+          "phone": phoneController.text,
+        };
+        await DatabaseMethods().addUser(Id, userInfoMap);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Loginpage()));
       } on FirebaseException catch (e) {
@@ -70,11 +89,14 @@ class _SignUppageState extends State<SignUppage> {
               children: [
                 Image.asset(
                   "assests/images/file.png",
-                  height: 250,
+                  height: MediaQuery.sizeOf(context).height * 0.2,
                 ),
                 Text(
                   "Sign Up",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
@@ -111,11 +133,44 @@ class _SignUppageState extends State<SignUppage> {
                   alignment: Alignment.topLeft,
                   widthFactor: 7,
                   child: Text(
+                    "Phone Number",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  ),
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.phone,
+                  controller: phoneController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter your phone number";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      hintText: "Email",
+                      hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      enabled: true,
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  widthFactor: 7,
+                  child: Text(
                     "Email",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                   ),
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -133,9 +188,7 @@ class _SignUppageState extends State<SignUppage> {
                           borderRadius: BorderRadius.circular(10)),
                       enabled: true,
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                          )
-                          ),
+                          borderRadius: BorderRadius.circular(10))),
                 ),
                 SizedBox(
                   height: 20,

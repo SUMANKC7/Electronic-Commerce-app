@@ -39,6 +39,7 @@ signInWithGoogle(BuildContext context) async {
         "name": userdetail.displayName,
         "imgUrl": userdetail.photoURL,
         "id": userdetail.uid,
+        "phone":userdetail.phoneNumber,
       };
       await DatabaseMethods()
           .addUser(userdetail.uid, userInfomap)

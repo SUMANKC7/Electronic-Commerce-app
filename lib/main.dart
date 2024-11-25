@@ -38,7 +38,7 @@ class ElectronicCommerce extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "E-Commerce App",
-        initialRoute: "loginpage",
+        initialRoute: "home",
         routes: {
           "loginpage": (context) => const Loginpage(),
           "signuppage": (context) => const SignUppage(),
