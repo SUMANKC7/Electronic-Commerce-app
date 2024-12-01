@@ -2,6 +2,7 @@ import 'package:electronic_ecommerce/model/categorymodel.dart';
 import 'package:electronic_ecommerce/pages/accountpage.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
+import 'package:electronic_ecommerce/pages/profile.dart';
 import 'package:electronic_ecommerce/provider/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _HomescreenState extends State<Homescreen> {
       Homepage(),
        // Pass widget.categories here
       CartPage(),
-      MyAccount()
+      MyProfile()
     ];
   }
 
