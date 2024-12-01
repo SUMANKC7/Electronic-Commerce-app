@@ -342,49 +342,50 @@ class _BuynowState extends State<Buynow> {
                                         ],
                                       )),
                                   SizedBox(
-                                    child: ElevatedButton(
-onPressed: () async {
-    // Sample total and product details (replace with actual data)
-    double totalAmt = 100.00; // Example amount
+                                    child:ElevatedButton(
+  onPressed: () async {
+    // Extract product details
+    String productName = product.producttitle ?? "Unknown Product";
+    double productPrice = product.productPrice ?? 0.0;
+    String productId = product.id.toString(); // Assuming `productId` is available
+    int quantity = buyNowProvider.quantity;
+
+    // Prepare order details
+    double totalAmt = productPrice * quantity; // Calculate total amount
     List<Map<String, dynamic>> productsDetails = [
       {
-        "name": "Product 1",
-        "price": 50.00,
-        "quantity": 2,
-        "id": "product_1_id",
+        "name": productName,
+        "price": productPrice,
+        "quantity": quantity,
+        "id": productId,
       },
     ];
 
+    // Log details (for debugging purposes)
     print("Total amount: $totalAmt");
     print("Products Details: $productsDetails");
 
     // Trigger payment process
     await PaymentService.makePayment(
       totalAmt.toString(),
-      "usd",
+      "usd", // Specify currency
       {
         "products": productsDetails,
         "total": totalAmt,
       },
     );
   },
-  
-                                        
-                                        
-                                      
-                                      style: ElevatedButton.styleFrom(
-                                          minimumSize: Size(10, 52),
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 252, 107, 3),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(7))),
-                                      child: Text(
-                                        "Place Order",
-                                        style: TextStyle(
-                                            fontSize: 18, color: Colors.white),
-                                      ),
-                                    ),
+  style: ElevatedButton.styleFrom(
+    minimumSize: Size(10, 52),
+    backgroundColor: const Color.fromARGB(255, 252, 107, 3),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+  ),
+  child: Text(
+    "Place Order",
+    style: TextStyle(fontSize: 18, color: Colors.white),
+  ),
+),
+
                                   ),
                                 ],
                               ),

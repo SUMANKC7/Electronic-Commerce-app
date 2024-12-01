@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:electronic_ecommerce/pages/payment/consts.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class PaymentService {
       var response = await http.post(
         Uri.parse("https://api.stripe.com/v1/payment_intents"),
         headers: {
-          "Authorization": "Bearer YOUR_STRIPE_SECRET_KEY", // Replace with your secret key
+          "Authorization": "Bearer $stripeSecretKey", // Replace with your secret key
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: body,
@@ -99,8 +100,16 @@ class PaymentService {
     }
   }
 
-  static String calculateAmount(String amount) {
-    final calculatedAmount = (int.parse(amount) * 100); // Amount in cents
-    return calculatedAmount.toString();
+static String calculateAmount(String amount) {
+  try {
+    // Convert the amount to cents
+    double amountInDollars = double.parse(amount); // Parse as a double
+    int amountInCents = (amountInDollars * 100).toInt(); // Convert to cents
+    return amountInCents.toString();
+  } catch (e) {
+    print("Error parsing amount: $e");
+    return "0"; // Return a default value to avoid crashes
   }
+}
+
 }

@@ -42,14 +42,14 @@ class _SignUppageState extends State<SignUppage> {
         await SharedPreferenceHelper().saveUserEmail(emailController.text);
         await SharedPreferenceHelper().saveUserImage(nameController.text);
         await SharedPreferenceHelper().saveUserId(Id);
-        await SharedPreferenceHelper().saveUserImage("images/assests/carosuelImage/banner.png");
+        await SharedPreferenceHelper().saveUserImage("assests/images/fragrance.png");
         await SharedPreferenceHelper().saveUserNumber(phoneController.text);
 
         Map<String, dynamic> userInfoMap = {
           "Name": nameController.text,
           "Email": emailController.text,
           "Id": Id,
-          "Image": "images/assests/carosuelImage/banner.png",
+          "Image": "assests/images/fragrance.png",
           "phone": phoneController.text,
         };
         await DatabaseMethods().addUser(Id, userInfoMap);
