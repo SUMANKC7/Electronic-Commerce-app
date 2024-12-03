@@ -2,6 +2,7 @@ import 'package:electronic_ecommerce/authentication/loginpage.dart';
 import 'package:electronic_ecommerce/authentication/signup.dart';
 import 'package:electronic_ecommerce/features/map.dart';
 import 'package:electronic_ecommerce/pages/addtocart.dart';
+import 'package:electronic_ecommerce/pages/frontpage.dart';
 import 'package:electronic_ecommerce/pages/home.dart';
 import 'package:electronic_ecommerce/pages/homepage.dart';
 import 'package:electronic_ecommerce/pages/payment/consts.dart';
@@ -38,7 +39,7 @@ class ElectronicCommerce extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "E-Commerce App",
-        initialRoute: "home",
+        initialRoute: "frontpage",
         routes: {
           "loginpage": (context) => const Loginpage(),
           "signuppage": (context) => const SignUppage(),
@@ -48,6 +49,7 @@ class ElectronicCommerce extends StatelessWidget {
               ),
           "map": (context) => MapPage(),
           "cartpage": (context) => CartPage(),
+          "frontpage":(context)=>Frontpage()
         },
       ),
     );
